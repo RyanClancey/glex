@@ -3,16 +3,41 @@
 CubeAsset::CubeAsset() {
   // model coordinates, origin at centre.
   GLfloat vertex_buffer [] {
-    -0.5, -0.5, -0.5
-    , -0.5,  0.5, -0.5
-    ,  0.5, -0.5, -0.5
-    ,  0.5,  0.5, -0.5
+    //Cube 1
+      -1.0, -1.0, 1.0
+    , -1.0,  1.0, 1.0
+    ,  1.0, -1.0, 1.0
+    ,  1.0,  1.0, 1.0
+    , -1.0,  1.0, -1.0
+    ,  1.0,  1.0, -1.0
+    ,  1.0, -1.0, -1.0
+    , -1.0, -1.0, -1.0
+
   };
 
-  element_buffer_length = 6;
+  element_buffer_length = 36;
   GLuint element_buffer []  {
-    0, 1, 2
-    , 1, 3, 2
+  //Cube 1
+  //Front Face
+      0, 1, 2 //front left
+    , 1, 2, 3 //front right
+  //Top Face
+    , 1, 3, 4
+    , 3, 4, 5
+  //Right Face
+    , 2, 3, 6
+    , 3, 5, 6
+  //Back Face
+    , 4, 5, 6
+    , 4, 6, 7
+  //Left Face
+    , 1, 4, 7
+    , 0, 1, 7
+  //Bottom Face
+    , 0, 6, 7
+    , 0, 2, 6
+
+        
   };
 
   // Transfer buffers to the GPU
@@ -23,7 +48,8 @@ CubeAsset::CubeAsset() {
 
   // immediately bind the buffer and transfer the data
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, vertex_buffer, GL_STATIC_DRAW);
+  // How many vertices (change to 24 for 1 cube) 
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, vertex_buffer, GL_STATIC_DRAW);
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);

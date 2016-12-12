@@ -31,7 +31,7 @@ mat4 rotate_x(float theta)
 
 void main() {
       gl_Position = projection(radians(45.0), 4.0/3.0, -0.1, -1000.0)
-                    * rotate_x(radians(45.0))
+                    * rotate_x(radians(45.0)) 
                     * vec4(position, 1.0f);
       frag_color = vec3(1.0, 1.0, 1.0); // white
 }
